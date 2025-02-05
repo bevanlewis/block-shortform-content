@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Short Form Content Blocker",
+  "version": "1.0",
+  "description": "Blocks YouTube Shorts and Instagram Reels by redirecting to homepages",
+  "permissions": ["tabs", "webRequest", "webNavigation"],
+  "host_permissions": ["*://*.youtube.com/*", "*://*.instagram.com/*"],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "action": {
+    "default_popup": "popup/popup.html"
+  }
+}

@@ -5,10 +5,22 @@ const observer = new MutationObserver(() => {
     el.closest("ytd-guide-entry-renderer")?.remove();
   });
 
-  // Remove Instagram reels button
-  document.querySelectorAll('a[href="/reels"]').forEach((el) => {
-    el.style.display = "none";
-  });
+  // Remove Instagram reels - updated selectors
+  document
+    .querySelectorAll(
+      [
+        'a[href="/reels"]',
+        'a[href="/reels/"]',
+        'svg[aria-label="Reels"]',
+        'span:contains("Reels")',
+      ].join(",")
+    )
+    .forEach((el) => {
+      const reelsContainer = el.closest('div[role="link"], a[role="link"]');
+      if (reelsContainer) {
+        reelsContainer.style.display = "none";
+      }
+    });
 });
 
 // Start observing DOM changes

@@ -6,7 +6,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
     // Handle YouTube Homepage
     // YouTube content can only be reached if you serach for it
-    if (url.hostname === "www.youtube.com" && url.pathname.startsWith("/")) {
+    if (url.hostname === "www.youtube.com" && url.pathname === "/") {
       chrome.tabs.update(tabId, { url: "https://duckduckgo.com/?t=brave" });
     }
 

@@ -1,74 +1,49 @@
 // src/instagram-content.js
-console.log("Instagram Content Blocker Script: Initializing for UI changes...");
+console.log(
+  "Instagram Content Blocker Script: Initializing for UI changes (simplified)..."
+);
 
 // --- Configuration & Selectors ---
 const INSTAGRAM_HOSTNAME = "www.instagram.com";
 const INSTAGRAM_SELECTORS = {
-  reelsButton: [
-    'a[href="/reels/"]',
-    'a[role="link"][href*="/reels/"]',
-    'svg[aria-label="Reels"]',
-  ],
-  exploreButton: 'a[href="/explore/"]',
+  reelsLink: 'a[href="/reels/"]', // Direct link to Reels
+  exploreLink: 'a[href="/explore/"]', // Direct link to Explore
 };
 
 // --- UI Modification Logic ---
-function hideElement(element, elementType) {
-  if (!element) return;
-  let containerToHide = null;
-  if (element.tagName.toLowerCase() === "svg") {
-    const clickableParent = element.closest("a");
-    if (clickableParent) {
-      if (
-        clickableParent.parentElement &&
-        clickableParent.parentElement.parentElement &&
-        clickableParent.parentElement.parentElement.tagName.toLowerCase() ===
-          "span"
-      ) {
-        containerToHide = clickableParent.parentElement.parentElement;
-      } else {
-        containerToHide = clickableParent.closest('span[class*="x"]');
-      }
-      if (!containerToHide) containerToHide = clickableParent.parentElement;
-    }
-  } else {
-    if (
-      element.parentElement &&
-      element.parentElement.parentElement &&
-      element.parentElement.parentElement.tagName.toLowerCase() === "span"
-    ) {
-      containerToHide = element.parentElement.parentElement;
-    } else {
-      containerToHide = element.closest('span[class*="x"]');
-    }
-    if (!containerToHide) containerToHide = element.parentElement;
-  }
-  if (!containerToHide && element.style.display !== "none") {
-    console.log(
-      `Instagram Content Blocker Script: Hiding ${elementType} element directly (fallback).`
-    );
-    element.style.display = "none";
-    return;
-  }
-  if (containerToHide && containerToHide.style.display !== "none") {
-    console.log(
-      `Instagram Content Blocker Script: Hiding ${elementType} container.`
-    );
-    containerToHide.style.display = "none";
-  }
-}
-
 function handleInstagramUIChanges() {
   if (window.location.hostname !== INSTAGRAM_HOSTNAME) return;
-  for (const selector of INSTAGRAM_SELECTORS.reelsButton) {
-    const reelsElement = document.querySelector(selector);
-    if (reelsElement) {
-      hideElement(reelsElement, "Reels button");
+
+  // Hide Reels Button
+  const reelsLink = document.querySelector(INSTAGRAM_SELECTORS.reelsLink);
+  if (
+    reelsLink &&
+    reelsLink.parentElement &&
+    reelsLink.parentElement.parentElement
+  ) {
+    const reelsButtonContainer = reelsLink.parentElement.parentElement; // This should be the main span container
+    if (reelsButtonContainer.style.display !== "none") {
+      console.log(
+        "Instagram Content Blocker Script: Hiding Reels button container (simplified)."
+      );
+      reelsButtonContainer.style.display = "none";
     }
   }
-  const exploreLink = document.querySelector(INSTAGRAM_SELECTORS.exploreButton);
-  if (exploreLink) {
-    hideElement(exploreLink, "Explore button");
+
+  // Hide Explore Button
+  const exploreLink = document.querySelector(INSTAGRAM_SELECTORS.exploreLink);
+  if (
+    exploreLink &&
+    exploreLink.parentElement &&
+    exploreLink.parentElement.parentElement
+  ) {
+    const exploreButtonContainer = exploreLink.parentElement.parentElement; // This should be the main span container
+    if (exploreButtonContainer.style.display !== "none") {
+      console.log(
+        "Instagram Content Blocker Script: Hiding Explore button container (simplified)."
+      );
+      exploreButtonContainer.style.display = "none";
+    }
   }
 }
 
@@ -96,7 +71,7 @@ function startObserver() {
       subtree: true,
     });
     console.log(
-      "Instagram Content Blocker Script: UI observer initialized and watching DOM changes."
+      "Instagram Content Blocker Script: UI observer initialized (simplified) and watching DOM changes."
     );
   } else {
     setTimeout(startObserver, 100); // Retry if body not ready

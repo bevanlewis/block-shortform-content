@@ -18,8 +18,10 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
       if (url.pathname.startsWith("/reels")) {
         console.log("Background: Redirecting Instagram Reels");
         chrome.tabs.update(tabId, { url: "https://www.instagram.com" });
-      } else if (url.pathname === "/explore/") {
-        console.log("Background: Redirecting Instagram Explore page");
+      } else if (url.pathname === "/explore" || url.pathname === "/explore/") {
+        console.log(
+          "Background: Redirecting Instagram Explore page (matched /explore or /explore/)"
+        );
         chrome.tabs.update(tabId, { url: "https://www.instagram.com" });
       }
     }

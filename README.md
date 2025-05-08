@@ -8,8 +8,7 @@ Short Form Content Blocker is a Chrome extension designed to block YouTube Short
 
 - Redirects YouTube Shorts to the YouTube homepage.
 - Redirects Instagram Reels to the Instagram homepage.
-- Removes YouTube Shorts from the sidebar.
-- Hides Instagram Reels buttons and text.
+- Hides Instagram Reels and Explore buttons.
 
 ## Installation
 

@@ -9,15 +9,19 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
       url.hostname === "www.youtube.com" &&
       url.pathname.startsWith("/shorts")
     ) {
+      console.log("Background: Redirecting YouTube Shorts");
       chrome.tabs.update(tabId, { url: "https://www.youtube.com" });
     }
 
-    // Handle Instagram Reels
-    if (
-      url.hostname === "www.instagram.com" &&
-      url.pathname.startsWith("/reels")
-    ) {
-      chrome.tabs.update(tabId, { url: "https://www.instagram.com" });
+    // Handle Instagram Reels and Explore page
+    if (url.hostname === "www.instagram.com") {
+      if (url.pathname.startsWith("/reels")) {
+        console.log("Background: Redirecting Instagram Reels");
+        chrome.tabs.update(tabId, { url: "https://www.instagram.com" });
+      } else if (url.pathname === "/explore/") {
+        console.log("Background: Redirecting Instagram Explore page");
+        chrome.tabs.update(tabId, { url: "https://www.instagram.com" });
+      }
     }
   }
 });

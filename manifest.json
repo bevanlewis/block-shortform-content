@@ -10,8 +10,12 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.youtube.com/*", "*://*.instagram.com/*"],
-      "js": ["src/content.js"]
+      "matches": ["*://*.youtube.com/*"],
+      "js": ["src/youtube-content.js"]
+    },
+    {
+      "matches": ["*://*.instagram.com/*"],
+      "js": ["src/instagram-content.js"]
     }
   ],
   "action": {
